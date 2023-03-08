@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: dw-auth-db
+  labels:
+    app: dw-auth-db
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dw-auth-db
+  template:
+    metadata:
+      labels:
+        app: dw-auth-db
+        tier: backend
+    spec:
+      containers:
+        - name: dw-auth-db
+          image: postgres
+          ports:
+            - containerPort: 5432
+          env:
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: dw-secrets
+                  key: POSTGRES_PASSWORD
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: dw-secrets
+                  key: POSTGRES_USER
+            - name: POSTGRES_DB
+              valueFrom:
+                secretKeyRef:
+                  name: dw-secrets
+                  key: POSTGRES_DB
+
+          volumeMounts:
+            - name: dw-auth-postgres-volume-mount
+              mountPath: /var/lib/postgresql/data
+      volumes:
+        - name: dw-auth-postgres-volume-mount
+          persistentVolumeClaim:
+            claimName: dw-postgres-pvc

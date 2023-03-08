@@ -10,9 +10,10 @@ db.sqlite3
 __pycache__
 
 
-
+secrets.yml
 dbAuth.env
 dbConfig.env
+docker-compose.yml
 
 
 
@@ -100,8 +101,6 @@ build/Release
 # Dependency directories
 node_modules/
 jspm_packages/
-config/
-config/*
 
 # Typescript v1 declaration files
 typings/

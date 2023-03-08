@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: dw-wallet-app
+  labels:
+    app: dw-wallet-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dw-wallet-app
+  template:
+    metadata:
+      labels:
+        app: dw-wallet-app
+    spec:
+      containers:
+        - name: dw-wallet-app
+          image: dw-wallet-image:4
+          ports:
+            - containerPort: 8000
+          env:
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: dw-secrets
+                  key: POSTGRES_PASSWORD
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: dw-secrets
+                  key: POSTGRES_USER
+            - name: POSTGRES_DB
+              valueFrom:
+                secretKeyRef:
+                  name: dw-secrets
+                  key: POSTGRES_DB
+            - name: POSTGRES_HOST
+              value: dw-auth-db-service
+           

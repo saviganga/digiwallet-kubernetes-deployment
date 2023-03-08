@@ -28,7 +28,7 @@ else:
             "PORT": 5432,
         },
 
-        "config": {        
+        "auth": {        
             "ENGINE": "django.db.backends.postgresql",
             "NAME": os.environ.get('POSTGRES_DB'),
             "USER": os.environ.get('POSTGRES_USER'),
@@ -37,10 +37,9 @@ else:
             "PORT": 5432,
         },
 
+        
+        'test': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
     }
-
-CELERY_BROKER_URL = "redis://redis:6379/0"
-CELERY_RESULT_BACKEND = "redis://redis:6379/0"
-REDIS_URL = "redis://redis:6379/0"
-
-JWT_SECRET_KEY = os.environ.get('JWT_SECRET_KEY')

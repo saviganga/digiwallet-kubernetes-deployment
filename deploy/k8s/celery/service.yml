@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: celery-svc
+spec:
+  selector:
+    app: celery-deploy
+  ports:
+    - protocol: TCP
+      port: 5555

@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: dw-config-app
+  labels:
+    app: dw-config-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dw-config-app
+  template:
+    metadata:
+      labels:
+        app: dw-config-app
+    spec:
+      containers:
+        - name: dw-config-app
+          image: dw-config-image:2
+          ports:
+            - containerPort: 8000
+          env:
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: dw-secrets
+                  key: POSTGRES_PASSWORD
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: dw-secrets
+                  key: POSTGRES_USER
+            - name: POSTGRES_DB
+              valueFrom:
+                secretKeyRef:
+                  name: dw-secrets
+                  key: POSTGRES_DB
+            - name: POSTGRES_HOST
+              value: dw-auth-db-service
+           

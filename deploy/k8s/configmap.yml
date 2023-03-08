@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: dw-configs
+data:
+  REDIS_HOST: redis-service
+  CELERY_BROKER_URLl: authservice
+  CELERY_RESULT_BACKEND: authservice
+  CONFIG_POSTGRES_USER: digi-wallet-config
+  ENVIRONMENT: STAGING
+  JWT_CODE: HS256

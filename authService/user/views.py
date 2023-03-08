@@ -46,6 +46,25 @@ import json
 from   datetime import  datetime as dt, date
 import pytz
 
+from user import enums as user_enums
+
+
+class GetEnums(APIView):
+
+    def get(self, request):
+
+        gender = user_enums.GENDER
+        return Response(
+            data={
+                "status": "SUCCESS",
+                "message": "Motherfucker",
+                "data": gender
+            },
+            status=status.HTTP_200_OK
+        )
+
+
+
 
 class UserViewSet(ModelViewSet):
     queryset = user_models.CustomUser.objects.all()

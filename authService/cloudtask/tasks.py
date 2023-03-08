@@ -12,7 +12,7 @@ def create_user_wallet_signup(user, jwt_token, currency):
             "user": user
         }
 
-        wallet_box_url = "http://ec2-54-174-47-103.compute-1.amazonaws.com:12000/wallet/walletbox/"
+        wallet_box_url = "http://localhost:30004/wallet/walletbox/"
 
         HEADERS = {
             "Authorization": f"JWT {jwt_token}",
@@ -41,7 +41,7 @@ def create_user_wallet_signup(user, jwt_token, currency):
             "currency": currency
         }
 
-        wallet_url = "http://ec2-54-174-47-103.compute-1.amazonaws.com:12000/wallet/wallets/"
+        wallet_url = "http://localhost:30004/wallet/wallets/"
 
         headers = {
             "Authorization": f"JWT {jwt_token}",
