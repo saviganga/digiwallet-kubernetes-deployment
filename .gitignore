@@ -91,6 +91,7 @@ coverage
 .nyc_output
 .grunt
 bower_components
+ingress-host.yml
 
 # node-waf configuration
 .lock-wscript

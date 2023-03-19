@@ -23,6 +23,7 @@ In this project, I deployed and managed three (3) django microservice applicatio
     - k8s: folder containing configuration files for kubernetes deployment and management
         - secrets.yml: contains base64 encrypted secrets for k8s cluster
         - configmap.yml: contains environment variables for k8s cluster
+        - ingress.yml: contains imgress routing rules. Maps domain names to internal services for acess from the internet.
         - db:
             - pv.yml: persistent volume configuration file - used to reserve a specified amount of storage
             - pvc.yml: persistent volume claim configuration file - used to utilize the reserved storage in persistent volume
@@ -50,8 +51,12 @@ In this project, I deployed and managed three (3) django microservice applicatio
 
 - USAGE
 
-1. run ./start_cluster.sh script to start the cluster
-2. run kubectl commands to manage the cluster
+1. Set up Ingress controller (Load Balancer) for your environment - https://kubernetes.github.io/ingress-nginx/deploy/#quick-start
+2. Map your domain name to the Load Balancer DNS
+3. Modify external services. (make them internal so they can be mapped to the ingress rule)
+4. run ./start_cluster.sh script to start the cluster
+5. Test access to your application using the registered domain name
+6. run kubectl commands to manage the cluster
 
 - IMPROVEMENTS
 1. using variables to improve reusability
