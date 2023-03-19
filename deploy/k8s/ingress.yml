@@ -1,0 +1,54 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: dw-auth-ingress
+spec:
+  rules:
+  - host: auth.dw.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: dw-auth-ingress-service
+            port:
+              number: 8000
+  ingressClassName: nginx
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: dw-config-ingress
+spec:
+  rules:
+  - host: config.dw.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: dw-config-ingress-service
+            port:
+              number: 8000
+  ingressClassName: nginx
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: dw-wallet-ingress
+spec:
+  rules:
+  - host: wallet.dw.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: dw-wallet-ingress-service
+            port:
+              number: 8000
+  ingressClassName: nginx
